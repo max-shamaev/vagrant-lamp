@@ -134,21 +134,3 @@ bash "deploy" do
   code "sudo perl -pi -e 's/(\s*)#/$1;/' /etc/php5/cli/conf.d/*ini"
   notifies :restart, resources("service[apache2]"), :delayed
 end
-
-# Install Percona Toolkit
-bash "percona-key" do
-  # Install percona repo key. 
-  # We can't use 'apt' recipe, because this command should be run with sudo
-  code "sudo apt-key adv --keyserver keys.gnupg.net --recv 1C4CBDCDCD2EFD2A"
-end
-apt_repository "percona" do
-  uri "http://repo.percona.com/apt"
-  components ["main"]
-  distribution "lucid"
-end
-bash "apt-get-update" do
-  code "sudo apt-get update"
-end
-%w{ libmysqlclient16 percona-toolkit }.each do |a_package|
-  package a_package
-end
