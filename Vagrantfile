@@ -15,10 +15,12 @@ Vagrant.configure("2") do |config|
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine.
-  # Forward MySql port on 33066, used for connecting admin-clients to localhost:33066
+  # Forward MySql port on 33066, used for connecting admin-clients to localhost:33066 (MySQL)
   config.vm.network :forwarded_port, guest: 3306, host: 33066
-  # Forward http port on 8080, used for connecting web browsers to localhost:8080
+  # Forward http port on 8080, used for connecting web browsers to localhost:8080 (HTTP server)
   config.vm.network :forwarded_port, guest: 80, host: 8080
+  # Forward http port on 1080, used for connecting web browsers to localhost:1080 (mailcatcher)
+  config.vm.network :forwarded_port, guest: 1080, host: 1080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

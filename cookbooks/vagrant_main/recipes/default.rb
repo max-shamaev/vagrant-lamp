@@ -14,6 +14,9 @@ include_recipe "apache2::mod_php5"
 include_recipe "composer"
 include_recipe "phing"
 include_recipe "php-box"
+include_recipe "networking_basic"
+include_recipe "memcached"
+include_recipe "php::module_memcache"
 
 # Install packages
 %w{ debconf vim screen tmux mc subversion curl make g++ libsqlite3-dev graphviz libxml2-utils lynx links}.each do |a_package|
@@ -71,6 +74,7 @@ bash "debconf_for_phpmyadmin" do
   code "debconf-set-selections /tmp/phpmyadmin.deb.conf"
 end
 package "phpmyadmin"
+code "sudo perl -pi -e 's/\/\/\s*(\$cfg..Servers....i...AllowNoPassword.. = TRUE;)/$1/' /etc/phpmyadmin/config.inc.php"
 
 # Install Xdebug
 php_pear "xdebug" do
@@ -112,12 +116,9 @@ package "php5-xsl" do
   action :install
 end
 
-# Get eth1 ip
-eth1_ip = node[:network][:interfaces][:eth1][:addresses].select{|key,val| val[:family] == 'inet'}.flatten[0]
-
 # Setup MailCatcher
 bash "mailcatcher" do
-  code "mailcatcher --http-ip #{eth1_ip} --smtp-port 25"
+  code "mailcatcher --http-ip 0.0.0.0 --smtp-port 25"
   not_if "ps ax | grep -v grep | grep mailcatcher";
 end
 template "#{node['php']['ext_conf_dir']}/mailcatcher.ini" do
