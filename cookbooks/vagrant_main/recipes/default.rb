@@ -74,9 +74,9 @@ bash "debconf_for_phpmyadmin" do
   code "debconf-set-selections /tmp/phpmyadmin.deb.conf"
 end
 package "phpmyadmin"
-bash "phpmyadmin-fix" do
-  code "sudo perl -pi -e 's/\/\/\s*(\$cfg..Servers....i...AllowNoPassword.. = TRUE;)/$1/' /etc/phpmyadmin/config.inc.php"
-end
+#bash "phpmyadmin-fix" do
+#  code "sudo perl -pi -e 's/\/\/\s*(\$cfg..Servers....i...AllowNoPassword.. = TRUE;)/$1/' /etc/phpmyadmin/config.inc.php"
+#end
 
 # Install Xdebug
 php_pear "xdebug" do
