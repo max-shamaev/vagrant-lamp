@@ -1,7 +1,8 @@
 include_recipe "apt"
 include_recipe "build-essential"
 include_recipe "git"
-include_recipe "oh-my-zsh"
+# problem with git status on every directory operation
+#include_recipe "oh-my-zsh"
 include_recipe "apache2"
 include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_ssl"

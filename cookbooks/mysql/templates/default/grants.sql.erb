@@ -17,7 +17,7 @@ DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.
 UPDATE mysql.user SET Password=PASSWORD('<%= node['mysql']['server_root_password'] %>') WHERE User='root';
 
 # Set the second superuser 'vagrant'
-GRANT ALL ON *.* TO 'vagrant'@'%' IDENTIFIED BY '<%= node['mysql']['server_root_password'] %>' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'vagrant'@'localhost' IDENTIFIED BY '<%= node['mysql']['server_root_password'] %>' WITH GRANT OPTION;
 
 # Remove anonymous users
 <% if node['mysql']['remove_anonymous_users'] -%>

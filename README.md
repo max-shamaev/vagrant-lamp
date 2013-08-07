@@ -26,9 +26,9 @@ What's inside:
 
 Installed software:
 
-* Apache
+* Apache 2
 * MySQL
-* php
+* php + apc + memcached
 * phpMyAdmin
 * Xdebug with Webgrind
 * zsh with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
