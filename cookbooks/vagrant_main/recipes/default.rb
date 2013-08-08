@@ -55,14 +55,14 @@ end
 # Configure sites
 sites.each do |name|
   site = data_bag_item("sites", name)
-  docroot = site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
+  docroot_var = site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
 
   # Add site to apache config
   web_app site["host"] do
     template "sites.conf.erb"
     server_name site["host"]
     server_aliases site["aliases"]
-    docroot docroot
+    docroot docroot_var
   end  
 
   # Add site info in /etc/hosts
@@ -71,7 +71,7 @@ sites.each do |name|
   end
 
   bash "mkdir docroot" do
-    code "mkdir -p #{docroot}"
+    code "mkdir -p #{docroot_var}"
   end
 
 end
