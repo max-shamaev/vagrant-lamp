@@ -7,6 +7,14 @@ include_recipe "apache2"
 include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_ssl"
 include_recipe "mysql::server"
+
+bash "psproperties" do
+  code "sudo apt-get -y install python-software-properties"
+end
+bash "php54" do
+  code "sudo add-apt-repository ppa:ondrej/php5-oldstable"
+end
+
 include_recipe "php"
 include_recipe "php::module_mysql"
 include_recipe "php::module_apc"

@@ -223,7 +223,7 @@ engine = On
 ; Development Value: Off
 ; Production Value: Off
 ; http://php.net/short-open-tag
-short_open_tag = On
+short_open_tag = Off
 
 ; Allow ASP-style <% %> tags.
 ; http://php.net/asp-tags
@@ -428,7 +428,7 @@ disable_classes =
 ; threat in any way, but it makes it possible to determine whether you use PHP
 ; on your server or not.
 ; http://php.net/expose-php
-expose_php = On
+expose_php = Off
 
 ;;;;;;;;;;;;;;;;;;;
 ; Resource Limits ;
@@ -437,7 +437,7 @@ expose_php = On
 ; Maximum execution time of each script, in seconds
 ; http://php.net/max-execution-time
 ; Note: This directive is hardcoded to 0 for the CLI SAPI
-max_execution_time = 30
+max_execution_time = 3600
 
 ; Maximum amount of time each script may spend parsing request data. It's a good
 ; idea to limit this time on productions servers in order to eliminate unexpectedly
@@ -528,7 +528,7 @@ error_reporting = E_ALL & ~E_DEPRECATED
 ; Development Value: On
 ; Production Value: Off
 ; http://php.net/display-errors
-display_errors = Off
+display_errors = On
 
 ; The display of errors which occur during PHP's startup sequence are handled
 ; separately from display_errors. PHP's default behavior is to suppress those
@@ -635,7 +635,7 @@ html_errors = Off
 ; Example:
 ;error_log = php_errors.log
 ; Log errors to syslog (Event Log on NT, not valid in Windows 95).
-;error_log = syslog
+error_log = syslog
 
 ;;;;;;;;;;;;;;;;;
 ; Data Handling ;
@@ -769,7 +769,7 @@ default_mimetype = "text/html"
 
 ; PHP's default character set is set to empty.
 ; http://php.net/default-charset
-;default_charset = "iso-8859-1"
+default_charset = "UTF-8"
 
 ; Always populate the $HTTP_RAW_POST_DATA variable. PHP's default behavior is
 ; to disable this feature.
@@ -812,7 +812,7 @@ user_dir =
 ; properly in multithreaded servers, such as IIS or Zeus, and is automatically
 ; disabled on them.
 ; http://php.net/enable-dl
-enable_dl = Off
+enable_dl = On
 
 ; cgi.force_redirect is necessary to provide security running PHP as a CGI under
 ; most web servers.  Left undefined, PHP turns this on by default.  You can
@@ -876,7 +876,7 @@ file_uploads = On
 
 ; Maximum allowed size for uploaded files.
 ; http://php.net/upload-max-filesize
-upload_max_filesize = 2M
+upload_max_filesize = 60M
 
 ; Maximum number of files that can be uploaded via a single request
 max_file_uploads = 20
