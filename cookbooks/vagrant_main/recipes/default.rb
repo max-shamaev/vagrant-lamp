@@ -55,19 +55,25 @@ end
 # Configure sites
 sites.each do |name|
   site = data_bag_item("sites", name)
+  docroot = site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
 
   # Add site to apache config
   web_app site["host"] do
     template "sites.conf.erb"
     server_name site["host"]
     server_aliases site["aliases"]
-    docroot site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
+    docroot docroot
   end  
 
-   # Add site info in /etc/hosts
-   bash "hosts" do
-     code "echo 127.0.0.1 #{site["host"]} #{site["aliases"].join(' ')} >> /etc/hosts"
-   end
+  # Add site info in /etc/hosts
+  bash "hosts" do
+    code "echo 127.0.0.1 #{site["host"]} #{site["aliases"].join(' ')} >> /etc/hosts"
+  end
+
+  bash "mkdir docroot" do
+    code "mkdir -p #{docroot}"
+  end
+
 end
 
 # Disable default site
