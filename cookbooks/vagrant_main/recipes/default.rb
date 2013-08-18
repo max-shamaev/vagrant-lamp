@@ -160,5 +160,5 @@ bash "reinstall-xdebug" do
 end
 
 bash "change-git-editor" do
-  code "git config core.editor vim"
+  code "git config --global core.editor vim"
 end
