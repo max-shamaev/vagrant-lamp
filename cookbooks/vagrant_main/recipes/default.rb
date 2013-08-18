@@ -8,6 +8,7 @@ include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_ssl"
 include_recipe "mysql::server"
 
+# include php5-oldstable repository
 bash "psproperties" do
   code "sudo apt-get -y install python-software-properties"
 end
@@ -151,4 +152,13 @@ end
 bash "deploy" do
   code "sudo perl -pi -e 's/(\s*)#/$1;/' /etc/php5/cli/conf.d/*ini"
   notifies :restart, resources("service[apache2]"), :delayed
+end
+
+# reinstall xdebug with new repositories
+bash "reinstall-xdebug" do
+  code "sudo apt-get -y install php5-xdebug"
+end
+
+bash "change-git-editor" do
+  code "git config core.editor vim"
 end
