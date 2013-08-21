@@ -154,11 +154,6 @@ bash "deploy" do
   notifies :restart, resources("service[apache2]"), :delayed
 end
 
-# reinstall xdebug with new repositories
-bash "reinstall-xdebug" do
-  code "sudo apt-get -y install php5-xdebug"
-end
-
 bash "change-git-editor" do
   code "git config --global core.editor vim"
 end
