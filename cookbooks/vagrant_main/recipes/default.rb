@@ -153,7 +153,3 @@ bash "deploy" do
   code "sudo perl -pi -e 's/(\s*)#/$1;/' /etc/php5/cli/conf.d/*ini"
   notifies :restart, resources("service[apache2]"), :delayed
 end
-
-bash "change-git-editor" do
-  code "git config --global core.editor vim"
-end
