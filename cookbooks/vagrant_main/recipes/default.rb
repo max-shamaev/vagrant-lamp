@@ -19,7 +19,7 @@ end
 include_recipe "php"
 include_recipe "php::module_mysql"
 include_recipe "php::module_apc"
-include_recipe "php::module_curl"
+Ginclude_recipe "php::module_curl"
 include_recipe "apache2::mod_php5"
 include_recipe "composer"
 include_recipe "phing"
@@ -165,3 +165,11 @@ bash "deploy" do
   code "sudo perl -pi -e 's/(\s*)#/$1;/' /etc/php5/cli/conf.d/*ini"
   notifies :restart, resources("service[apache2]"), :delayed
 end
+
+# Upgrades
+%w{apache2 php5 mysql-server}.each do |a_package|
+  package a_package do
+    action :upgrade
+  end
+end
+
