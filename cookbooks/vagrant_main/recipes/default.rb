@@ -75,6 +75,18 @@ sites.each do |name|
     code "mkdir -p #{docroot_var}"
   end
 
+  bash "chmod docroot" do
+    code "chmod 777 #{docroot_var}"
+  end
+
+  bash "chown docroot" do
+    code "chown vagrant #{docroot_var}"
+  end
+
+  bash "chgrp docroot" do
+    code "chgrp vagrant #{docroot_var}"
+  end
+
 end
 
 # Disable default site
