@@ -19,7 +19,7 @@ end
 include_recipe "php"
 include_recipe "php::module_mysql"
 include_recipe "php::module_apc"
-Ginclude_recipe "php::module_curl"
+include_recipe "php::module_curl"
 include_recipe "apache2::mod_php5"
 include_recipe "composer"
 include_recipe "phing"
